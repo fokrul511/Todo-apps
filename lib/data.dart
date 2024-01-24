@@ -1,4 +1,5 @@
 class TodoListData {
   String title;
-  TodoListData({required this.title});
+  DateTime time;
+  TodoListData({required this.title,required this.time});
 }

@@ -9,7 +9,7 @@ class HomePage extends StatelessWidget {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       theme: ThemeData(
-        inputDecorationTheme: InputDecorationTheme(
+        inputDecorationTheme: const InputDecorationTheme(
           border: OutlineInputBorder(),
           focusedBorder: OutlineInputBorder(),
           errorBorder: OutlineInputBorder(
@@ -18,11 +18,11 @@ class HomePage extends StatelessWidget {
         ),
         elevatedButtonTheme: ElevatedButtonThemeData(
           style: ElevatedButton.styleFrom(
-            textStyle: TextStyle(
+            textStyle: const TextStyle(
               fontSize: 18,
               fontWeight: FontWeight.w600,
             ),
-            padding: EdgeInsets.symmetric(vertical: 19),
+            padding: const EdgeInsets.symmetric(vertical: 16),
           ),
         ),
       ),
