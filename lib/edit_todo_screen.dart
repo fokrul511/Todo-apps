@@ -1,7 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:todo_apps/todo.dart';
 
 class EditTodoScreen extends StatefulWidget {
-  const EditTodoScreen({super.key});
+  const EditTodoScreen({super.key, required this.todo});
+
+  final Todo todo;
 
   @override
   State<EditTodoScreen> createState() => _EditTodoScreenState();
@@ -11,6 +14,17 @@ class _EditTodoScreenState extends State<EditTodoScreen> {
   final TextEditingController _titleController = TextEditingController();
   final TextEditingController _discriptionController = TextEditingController();
   final GlobalKey<FormState> _globalKey = GlobalKey<FormState>();
+
+  //-------------------------------------
+
+  @override
+  void initState() {
+    super.initState();
+    _titleController.text = widget.todo.title;
+    _discriptionController.text = widget.todo.discription;
+  }
+
+  //-------------------------------------
 
   @override
   Widget build(BuildContext context) {
@@ -25,6 +39,7 @@ class _EditTodoScreenState extends State<EditTodoScreen> {
           child: Column(
             children: [
               TextFormField(
+                controller: _titleController,
                 decoration: const InputDecoration(
                   hintText: 'Title',
                 ),
@@ -37,6 +52,7 @@ class _EditTodoScreenState extends State<EditTodoScreen> {
               ),
               const SizedBox(height: 16.0),
               TextFormField(
+                controller: _discriptionController,
                 maxLines: 5,
                 maxLength: 100,
                 decoration: const InputDecoration(
@@ -55,7 +71,12 @@ class _EditTodoScreenState extends State<EditTodoScreen> {
                 child: ElevatedButton(
                   onPressed: () {
                     if (_globalKey.currentState!.validate()) {
-                      Navigator.pop(context);
+                      Todo todo = Todo(
+                        _titleController.text.trim(),
+                        _discriptionController.text.trim(),
+                        DateTime.now(),
+                      );
+                      Navigator.pop(context, todo);
                     }
                   },
                   child: const Text('Update'),

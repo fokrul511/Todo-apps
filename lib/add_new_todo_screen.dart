@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:todo_apps/todo.dart';
 
 class AddNewTodoScreen extends StatefulWidget {
   const AddNewTodoScreen({super.key});
@@ -25,6 +26,7 @@ class _AddNewTodoScreenState extends State<AddNewTodoScreen> {
           child: Column(
             children: [
               TextFormField(
+                controller: _titleController,
                 decoration: InputDecoration(
                   hintText: 'Title',
                 ),
@@ -37,6 +39,7 @@ class _AddNewTodoScreenState extends State<AddNewTodoScreen> {
               ),
               SizedBox(height: 16.0),
               TextFormField(
+                controller: _discriptionController,
                 maxLines: 5,
                 maxLength: 100,
                 decoration: InputDecoration(
@@ -55,7 +58,12 @@ class _AddNewTodoScreenState extends State<AddNewTodoScreen> {
                 child: ElevatedButton(
                   onPressed: () {
                     if (_globalKey.currentState!.validate()) {
-                      Navigator.pop(context);
+                      Todo todo = Todo(
+                        _titleController.text.trim(),
+                        _discriptionController.text.trim(),
+                        DateTime.now(),
+                      );
+                      Navigator.pop(context, todo);
                     }
                   },
                   child: Text('Add'),
